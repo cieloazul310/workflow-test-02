@@ -2,6 +2,8 @@ name: workflow_02
 on: 
   repository_dispatch:
     types: [update-package]
+  
+  workflow_dispatch:
 
 jobs:
   cypress-run:
@@ -28,7 +30,6 @@ jobs:
       - name: create PR
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.ACTION_KEY }}
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           commit-message: 'sync contents'
           branch: update_contents
