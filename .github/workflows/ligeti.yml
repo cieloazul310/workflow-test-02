@@ -1,6 +1,7 @@
 name: workflow_02
 on: 
   repository_dispatch:
+    types: [update-package]
 
 jobs:
   cypress-run:
