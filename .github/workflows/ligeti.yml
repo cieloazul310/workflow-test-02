@@ -22,7 +22,7 @@ jobs:
           token: ${{ secrets.ACTION_KEY }}
       
       - name: copy contents
-        run: cp -r workflow-test-01/content/**/* content
+        run: cp -r workflow-test-01/content .
 
       - name: clean repository1
         run: rm -rf workflow-test-01
