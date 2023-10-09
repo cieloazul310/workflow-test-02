@@ -10,3 +10,28 @@ jobs:
       - run: echo "Triggering Wokflow 2"
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: clone repository1
+        uses: actions/checkout@v4
+        with:
+          repository: cieloazul310/workflow-test-01
+          path: workflow-test-01
+          fetch-depth: 0
+          token: ${{ secrets.ACTION_KEY }}
+      
+      - name: copy contents
+        run: cp -r workflow-test-01/content content
+
+      - name: clean repository1
+        run: rm -rf workflow-test-01
+
+      - name: create PR
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.ACTION_KEY }}
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          commit-message: 'sync contents'
+          branch: update_contents
+          branch-suffix: timestamp
+          delete-branch: true
+          title: 'sync contents'
